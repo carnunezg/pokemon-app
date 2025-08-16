@@ -2,11 +2,11 @@
 
 // 1. Declara una constante nombre con tu nombre y una variable edad con tu edad. Luego muestra ambos en consola.
 
-// const nombre = 'Carlos';
-// const edad = 37;
+const nombre = 'Carlos';
+const edad = 37;
 
-// console.log(nombre);
-// console.log(edad);
+console.log(nombre);
+console.log(edad);
 
 
 // 2. Declara una variable activo con valor true, y luego reasígnala a false. ¿Qué sucede si intentas hacerlo con const? // error: Uncaught TypeError: Assignment to constant variable.
