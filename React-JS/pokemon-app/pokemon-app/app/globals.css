@@ -1,0 +1,44 @@
+body {
+  background: #ffffff;
+  color: var(--foreground);
+  font-family: --font-geist-mono, Arial, Helvetica, sans-serif;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  padding: 20px;
+  background-color: rgb(166, 138, 250);
+}
+
+.logo {
+  width: 300px;
+  height: 110px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.logo:hover {
+  filter: brightness(1.1);
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(119, 81, 233);
+  padding: 10px;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+  margin: 2rem 0;
+  width: 100%;
+}

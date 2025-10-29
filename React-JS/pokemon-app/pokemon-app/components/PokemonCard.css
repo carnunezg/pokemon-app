@@ -1,0 +1,24 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  background-color: rgb(208, 193, 252);
+  transition: transform 0.2s;
+  text-decoration: none;
+  color: black;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  background-color: rgb(226, 216, 254);
+}
+
+.card img {
+  width: 100px;
+  height: 100px;
+}
