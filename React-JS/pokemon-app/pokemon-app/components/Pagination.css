@@ -2,24 +2,41 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
-  margin-top: 20px;
+  gap: 1rem;
+  margin: 2rem 0;
 }
 
-.pagination button {
-  padding: 8px 12px;
+.pagination-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(119, 81, 233);
   border: none;
-  background-color: #1976d2;
-  color: white;
-  border-radius: 4px;
+  padding: 0.5rem;
+  font-size: 1.2rem;
   cursor: pointer;
+  border-radius: 4px;
 }
 
-.pagination button:hover {
-  background-color: #4195e9;
+.pagination-btn:hover {
+  background-color: rgb(131, 94, 244);
 }
 
-.pagination button:disabled {
-  background-color: #ccc;
+.pagination-btn:disabled {
+  opacity: 0.9;
+  background-color: rgb(153, 119, 255);
   cursor: not-allowed;
+}
+
+.number-pag {
+  font-weight: bold;
+}
+
+/* Teléfonos pequeños */
+@media screen and (max-width: 480px) {
+}
+
+/* Tablets y pantallas medianas */
+@media screen and (min-width: 481px) and (max-width: 768px) {
 }

@@ -1,16 +1,38 @@
 "use client";
 import Image from "next/image";
 
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PokemonCard from "../components/PokemonCard";
 import FilterBar from "../components/FilterBar";
 import Pagination from "../components/Pagination";
+import Spinner from "../components/Spinner";
+
+const tipoTraducido = {
+  agua: "water",
+  fuego: "fire",
+  planta: "grass",
+  eléctrico: "electric",
+  roca: "rock",
+  tierra: "ground",
+  normal: "normal",
+  lucha: "fighting",
+  siniestro: "dark",
+  acero: "steel",
+  psíquico: "psychic",
+  fantasma: "ghost",
+  insecto: "bug",
+  veneno: "poison",
+  volador: "flying",
+  hada: "fairy",
+  hielo: "ice",
+  dragón: "dragon",
+};
 
 export default function HomePage() {
   const [allPokemons, setAllPokemons] = useState([]);
   const [filteredPokemons, setFilteredPokemons] = useState([]);
   const [page, setPage] = useState(0);
-  const [filter, setFilter] = useState({ name: "", type: "" });
+  const [filter, setFilter] = useState({ query: "", type: "" });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -32,16 +54,26 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    const filtered = allPokemons.filter((pokemon) => {
-      const matchesName = pokemon.name
-        .toLowerCase()
-        .includes(filter.name.toLowerCase());
+    const query = filter.query.toLowerCase();
+    const tipoEnIngles = tipoTraducido[query]; // si existe, lo usamos
 
-      const matchesType = filter.type
+    const filtered = allPokemons.filter((pokemon) => {
+      const matchesName = pokemon.name.toLowerCase().includes(query);
+      const matchesTypeInQuery = pokemon.types.some((t) =>
+        t.type.name.toLowerCase().includes(query)
+      );
+      const matchesTypeTraducido = tipoEnIngles
+        ? pokemon.types.some((t) => t.type.name === tipoEnIngles)
+        : false;
+
+      const matchesTypeSelect = filter.type
         ? pokemon.types.some((t) => t.type.name === filter.type)
         : true;
 
-      return matchesName && matchesType;
+      return (
+        (matchesName || matchesTypeInQuery || matchesTypeTraducido) &&
+        matchesTypeSelect
+      );
     });
 
     setFilteredPokemons(filtered);
@@ -57,21 +89,19 @@ export default function HomePage() {
   }, [page, filteredPokemons]);
 
   const reset = () => {
-    setFilter({ name: "", type: "" });
+    setFilter({ query: "", type: "" });
     setPage(0);
   };
 
   const paginated = filteredPokemons.slice(page * 20, (page + 1) * 20);
 
   return (
-    <main>
+    <main className="nav">
       <section className="main">
-        <Image
+        <img
           className="logo"
           src="/logo.png"
           alt="Logo de la Pokédex"
-          width={200}
-          height={100}
           onClick={reset}
         />
 
@@ -80,6 +110,7 @@ export default function HomePage() {
 
       {loading ? (
         <div className="loading">
+          <Spinner />
           <p>Cargando lista de Pokémon...</p>
         </div>
       ) : (
@@ -90,7 +121,11 @@ export default function HomePage() {
         </div>
       )}
 
-      <Pagination page={page} setPage={setPage} />
+      <Pagination
+        page={page}
+        setPage={setPage}
+        totalPages={Math.ceil(filteredPokemons.length / 20)}
+      />
     </main>
   );
 }
