@@ -55,7 +55,7 @@ export default function HomePage() {
 
   useEffect(() => {
     const query = filter.query.toLowerCase();
-    const tipoEnIngles = tipoTraducido[query]; // si existe, lo usamos
+    const tipoEnIngles = tipoTraducido[query];
 
     const filtered = allPokemons.filter((pokemon) => {
       const matchesName = pokemon.name.toLowerCase().includes(query);
@@ -88,6 +88,15 @@ export default function HomePage() {
     return () => clearTimeout(timeout);
   }, [page, filteredPokemons]);
 
+  useEffect(() => {
+    setLoading(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 600);
+    return () => clearTimeout(timeout);
+  }, [page, filteredPokemons]);
+
   const reset = () => {
     setFilter({ query: "", type: "" });
     setPage(0);
@@ -101,17 +110,23 @@ export default function HomePage() {
         <img
           className="logo"
           src="/logo.png"
-          alt="Logo de la Pokédex"
+          alt="Logo Pokémon"
           onClick={reset}
         />
 
         <FilterBar filter={filter} setFilter={setFilter} />
       </section>
-
       {loading ? (
         <div className="loading">
           <Spinner />
-          <p>Cargando lista de Pokémon...</p>
+          <p className="p-loading">Cargando...</p>
+        </div>
+      ) : filteredPokemons.length === 0 ? (
+        <div className="no-results">
+          <p>No se encontró ningún Pokémon.</p>
+          <button className="reload-btn" onClick={reset}>
+            Recargar
+          </button>
         </div>
       ) : (
         <div className="grid">
@@ -120,7 +135,7 @@ export default function HomePage() {
           ))}
         </div>
       )}
-
+      ``
       <Pagination
         page={page}
         setPage={setPage}

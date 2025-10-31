@@ -1,21 +1,25 @@
+/* FFCB05 amarillo 1F1F1F gris 000000 negro 141414 negro opaco*/
+
 .card {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid #ccc;
+  border: 1px solid #ffcb05;
   border-radius: 8px;
   padding: 12px;
   text-align: center;
-  background-color: rgb(208, 193, 252);
+  background-color: #1f1f1f;
+  /* rgb(208, 193, 252); */
   transition: transform 0.2s;
   text-decoration: none;
-  color: black;
+  color: #ffcb05;
+  font-size: 14px;
 }
 
 .card:hover {
   transform: scale(1.05);
-  background-color: rgb(226, 216, 254);
+  background-color: #282828;
 }
 
 .card img {
@@ -28,10 +32,13 @@
   .card {
     width: 100%;
     max-width: 200px;
-    margin: 0 auto; /* centra la tarjeta */
+    margin: 0 auto;
   }
 }
 
 /* Tablets y pantallas medianas */
 @media screen and (min-width: 481px) and (max-width: 768px) {
+  .card {
+    font-size: 11px;
+  }
 }

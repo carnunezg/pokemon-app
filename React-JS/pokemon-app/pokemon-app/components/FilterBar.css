@@ -1,8 +1,9 @@
+/* FFCB05 amarillo 1F1F1F gris 000000 negro 141414 negro opaco*/
+
 .filter-bar {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
 }
 
 .search-container {
@@ -21,7 +22,9 @@
   height: 35px;
   font-size: 1rem;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #ffcb05;
+  background-color: transparent;
+  color: #ffcb05;
 }
 
 .search-icon-right {
@@ -32,11 +35,17 @@
   pointer-events: none;
 }
 
+.search:focus {
+  border: 1px solid #fbda55;
+  outline: none;
+}
+
 /* Teléfonos pequeños */
 @media screen and (max-width: 480px) {
   .search {
     width: 190px;
-    height: 35px;
+    height: 30px;
+    font-size: 14px;
   }
 
   .search-container {
@@ -46,4 +55,12 @@
 
 /* Tablets y pantallas medianas */
 @media screen and (min-width: 481px) and (max-width: 768px) {
+  .search {
+    width: 250px;
+    height: 35px;
+  }
+
+  .search-container {
+    margin: 10px;
+  }
 }

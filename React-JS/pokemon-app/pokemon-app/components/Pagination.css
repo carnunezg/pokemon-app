@@ -1,9 +1,12 @@
+/* FFCB05 amarillo 1F1F1F gris 000000 negro 141414 negro opaco*/
+
 .pagination {
+  padding: 20px;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
   align-items: center;
-  gap: 1rem;
-  margin: 2rem 0;
+  justify-content: center;
+  gap: 10px;
 }
 
 .pagination-btn {
@@ -11,30 +14,42 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: rgb(119, 81, 233);
-  border: none;
+  background-color: #141414;
+  border: 2px solid #ffcb05;
+  border-radius: 7px;
   padding: 0.5rem;
   font-size: 1.2rem;
   cursor: pointer;
-  border-radius: 4px;
+  color: #fbda55;
+  transition: 0.3s;
 }
 
 .pagination-btn:hover {
-  background-color: rgb(131, 94, 244);
+  background-color: #282828;
 }
 
 .pagination-btn:disabled {
-  opacity: 0.9;
-  background-color: rgb(153, 119, 255);
+  opacity: 0.5;
+  background-color: #1f1f1f;
+  border: 2px solid #4c4a4a;
+  color: #4c4a4a;
   cursor: not-allowed;
 }
 
 .number-pag {
+  text-align: center;
+  font-size: 15px;
   font-weight: bold;
+  color: #ffcb05;
 }
 
 /* Teléfonos pequeños */
 @media screen and (max-width: 480px) {
+  .number-pag {
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+  }
 }
 
 /* Tablets y pantallas medianas */

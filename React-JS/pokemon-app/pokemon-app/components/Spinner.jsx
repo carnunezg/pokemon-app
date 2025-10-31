@@ -3,9 +3,7 @@ import "./Spinner.css";
 const Spinner = () => {
   return (
     <div className="lds-roller">
-      <div></div>
-      <div></div>
-      <div></div>
+      <img src="/logo1.png" alt="Pokébola" className="spinner" />
       <div></div>
       <div></div>
       <div></div>

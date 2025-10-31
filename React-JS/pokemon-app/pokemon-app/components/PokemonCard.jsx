@@ -14,7 +14,7 @@ export default function PokemonCard({ name }) {
   if (!pokemon) return null;
 
   return (
-    <Link href="#" className="card">
+    <Link href={`/pokemon/${name}`} className="card">
       <img src={pokemon.sprites.front_default} alt={pokemon.name} />
       <h3>{pokemon.name}</h3>
       <p>Tipo: {pokemon.types.map((t) => t.type.name).join(", ")}</p>

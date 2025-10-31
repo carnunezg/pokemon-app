@@ -1,18 +1,22 @@
 body {
-  background-color: rgb(166, 138, 250);
+  background-color: #141414;
   color: var(--foreground);
   font-family: --font-geist-mono, Arial, Helvetica, sans-serif;
   height: 100vh;
   width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
 }
-
+/* FFCB05 amarillo 1F1F1F gris 000000 negro 141414 negro opaco*/
 .grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   align-items: center;
   justify-content: center;
   gap: 20px;
-  padding: 40px;
+  padding: 20px;
+  /* padding-bottom: 100px; */
 }
 
 .logo {
@@ -32,14 +36,13 @@ body {
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: rgb(119, 81, 233, 0.9);
-  padding: 10px;
+  background-color: rgba(2, 2, 2, 0.8);
+  padding: 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
 }
 
 .loading {
@@ -52,10 +55,42 @@ body {
   color: #555;
   margin: 2rem 0;
   width: 100%;
+  height: 600px;
+}
+
+.p-loading {
+  font-size: 20px;
+  color: #ffcb05;
 }
 
 .nav {
-  margin-top: 130px;
+  margin-top: 150px;
+}
+
+.no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffcb05;
+  font-size: 15px;
+  height: 600px;
+}
+
+.reload-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #141414;
+  color: #fbda55;
+  border: 2px solid #ffcb05;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.reload-btn:hover {
+  background-color: #303030;
 }
 
 /* Teléfonos pequeños */
@@ -63,17 +98,26 @@ body {
   .grid {
     grid-template-columns: repeat(1, 1fr);
     padding: 0px;
-    padding-top: 40px;
+    padding-top: 70px;
   }
 
   .logo {
     width: 250px;
-    height: 70px;
+    height: 90px;
   }
 
   .main {
     flex-direction: column;
     gap: 20px;
+    padding: 20px;
+  }
+
+  .loading {
+    height: 600px;
+  }
+
+  .p-loading {
+    font-size: 17px;
   }
 }
 
@@ -81,5 +125,14 @@ body {
 @media screen and (min-width: 481px) and (max-width: 768px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .main {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+  .loading {
+    height: 810px;
   }
 }
