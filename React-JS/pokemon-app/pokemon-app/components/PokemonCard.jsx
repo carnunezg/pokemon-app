@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import "./PokemonCard.css";
 
-export default function PokemonCard({ name }) {
+export default function PokemonCard({ name, page }) {
   const [pokemon, setPokemon] = useState(null);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function PokemonCard({ name }) {
   if (!pokemon) return null;
 
   return (
-    <Link href={`/pokemon/${name}`} className="card">
+    <Link href={`/pokemon/${name}?page=${page}`} className="card">
       <img src={pokemon.sprites.front_default} alt={pokemon.name} />
       <h3>{pokemon.name}</h3>
       <p>Tipo: {pokemon.types.map((t) => t.type.name).join(", ")}</p>

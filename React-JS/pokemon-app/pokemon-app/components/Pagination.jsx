@@ -8,8 +8,8 @@ import {
 
 export default function Pagination({ page, setPage, totalPages }) {
   const goToFirst = () => setPage(0);
-  const goToPrevious = () => setPage((prev) => Math.max(prev - 1, 0));
-  const goToNext = () => setPage((prev) => Math.min(prev + 1, totalPages - 1));
+  const goToPrevious = () => setPage(Math.max(page - 1, 0));
+  const goToNext = () => setPage(Math.min(page + 1, totalPages - 1));
   const goToLast = () => setPage(totalPages - 1);
 
   return (

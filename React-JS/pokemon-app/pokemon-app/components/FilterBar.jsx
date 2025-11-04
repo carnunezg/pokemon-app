@@ -4,7 +4,7 @@ import { IoSearchOutline } from "react-icons/io5";
 export default function FilterBar({ filter, setFilter }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFilter((prev) => ({ ...prev, [name]: value }));
+    setFilter({ ...filter, [name]: value });
   };
 
   return (

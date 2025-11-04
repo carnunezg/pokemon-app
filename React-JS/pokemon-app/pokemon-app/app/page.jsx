@@ -1,11 +1,11 @@
 "use client";
-import Image from "next/image";
 
 import { useEffect, useState } from "react";
 import PokemonCard from "../components/PokemonCard";
 import FilterBar from "../components/FilterBar";
 import Pagination from "../components/Pagination";
 import Spinner from "../components/Spinner";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const tipoTraducido = {
   agua: "water",
@@ -29,16 +29,18 @@ const tipoTraducido = {
 };
 
 export default function HomePage() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const initialPage = parseInt(searchParams.get("page") || "0");
+
+  const [page, setPage] = useState(initialPage);
   const [allPokemons, setAllPokemons] = useState([]);
-  const [filteredPokemons, setFilteredPokemons] = useState([]);
-  const [page, setPage] = useState(0);
   const [filter, setFilter] = useState({ query: "", type: "" });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchAllPokemons = async () => {
       setLoading(true);
-
       const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=1000");
       const data = await res.json();
 
@@ -53,56 +55,47 @@ export default function HomePage() {
     fetchAllPokemons();
   }, []);
 
-  useEffect(() => {
+  const filteredPokemons = allPokemons.filter((pokemon) => {
     const query = filter.query.toLowerCase();
     const tipoEnIngles = tipoTraducido[query];
 
-    const filtered = allPokemons.filter((pokemon) => {
-      const matchesName = pokemon.name.toLowerCase().includes(query);
-      const matchesTypeInQuery = pokemon.types.some((t) =>
-        t.type.name.toLowerCase().includes(query)
-      );
-      const matchesTypeTraducido = tipoEnIngles
-        ? pokemon.types.some((t) => t.type.name === tipoEnIngles)
-        : false;
+    const matchesName = pokemon.name.toLowerCase().includes(query);
+    const matchesTypeInQuery = pokemon.types.some((t) =>
+      t.type.name.toLowerCase().includes(query)
+    );
+    const matchesTypeTraducido = tipoEnIngles
+      ? pokemon.types.some((t) => t.type.name === tipoEnIngles)
+      : false;
 
-      const matchesTypeSelect = filter.type
-        ? pokemon.types.some((t) => t.type.name === filter.type)
-        : true;
+    const matchesTypeSelect = filter.type
+      ? pokemon.types.some((t) => t.type.name === filter.type)
+      : true;
 
-      return (
-        (matchesName || matchesTypeInQuery || matchesTypeTraducido) &&
-        matchesTypeSelect
-      );
-    });
+    return (
+      (matchesName || matchesTypeInQuery || matchesTypeTraducido) &&
+      matchesTypeSelect
+    );
+  });
 
-    setFilteredPokemons(filtered);
-    setPage(0);
-  }, [filter, allPokemons]);
-
-  useEffect(() => {
-    setLoading(true);
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 600);
-    return () => clearTimeout(timeout);
-  }, [page, filteredPokemons]);
-
-  useEffect(() => {
-    setLoading(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 600);
-    return () => clearTimeout(timeout);
-  }, [page, filteredPokemons]);
+  const paginatedPokemons = filteredPokemons.slice(page * 20, (page + 1) * 20);
+  const totalPages = Math.ceil(filteredPokemons.length / 20);
 
   const reset = () => {
     setFilter({ query: "", type: "" });
     setPage(0);
+    router.push("/");
   };
 
-  const paginated = filteredPokemons.slice(page * 20, (page + 1) * 20);
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+    router.push(`/?page=${newPage}`);
+  };
+
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter);
+    setPage(0);
+    router.push("/?page=0");
+  };
 
   return (
     <main className="nav">
@@ -114,7 +107,7 @@ export default function HomePage() {
           onClick={reset}
         />
 
-        <FilterBar filter={filter} setFilter={setFilter} />
+        <FilterBar filter={filter} setFilter={handleFilterChange} />
       </section>
       {loading ? (
         <div className="loading">
@@ -130,16 +123,16 @@ export default function HomePage() {
         </div>
       ) : (
         <div className="grid">
-          {paginated.map((p) => (
-            <PokemonCard key={p.name} name={p.name} />
+          {paginatedPokemons.map((p) => (
+            <PokemonCard key={p.name} name={p.name} page={page} />
           ))}
         </div>
       )}
-      ``
+
       <Pagination
         page={page}
-        setPage={setPage}
-        totalPages={Math.ceil(filteredPokemons.length / 20)}
+        setPage={handlePageChange}
+        totalPages={totalPages}
       />
     </main>
   );

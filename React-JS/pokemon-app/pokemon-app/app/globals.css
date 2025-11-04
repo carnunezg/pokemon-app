@@ -8,7 +8,6 @@ body {
   padding: 0;
   overflow: auto;
 }
-/* FFCB05 amarillo 1F1F1F gris 000000 negro 141414 negro opaco*/
 .grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -16,7 +15,6 @@ body {
   justify-content: center;
   gap: 20px;
   padding: 20px;
-  /* padding-bottom: 100px; */
 }
 
 .logo {
@@ -24,10 +22,12 @@ body {
   height: 110px;
   object-fit: cover;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .logo:hover {
   filter: brightness(1.1);
+  transform: scale(1.05);
 }
 
 .main {
@@ -125,6 +125,7 @@ body {
 @media screen and (min-width: 481px) and (max-width: 768px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
+    padding-top: 100px;
   }
 
   .main {
