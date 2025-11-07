@@ -49,6 +49,7 @@
   margin: 0 auto 1rem;
   width: 120px;
   transition: 0.5s;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
 }
 
 .modal-content img:hover {

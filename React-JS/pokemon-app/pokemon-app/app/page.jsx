@@ -84,11 +84,13 @@ export default function HomePage() {
     setFilter({ query: "", type: "" });
     setPage(0);
     router.push("/");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handlePageChange = (newPage) => {
     setPage(newPage);
     router.push(`/?page=${newPage}`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleFilterChange = (newFilter) => {

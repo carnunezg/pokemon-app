@@ -13,6 +13,12 @@ export default function PokemonDetailPage() {
   const page = searchParams.get("page") || "0";
 
   useEffect(() => {
+    if (pokemon) {
+      document.title = `Detalles de ${pokemon.name}`;
+    }
+  }, [pokemon]);
+
+  useEffect(() => {
     const fetchPokemon = async () => {
       const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
       if (res.ok) {

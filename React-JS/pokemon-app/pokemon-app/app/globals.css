@@ -23,11 +23,13 @@ body {
   object-fit: cover;
   cursor: pointer;
   transition: 0.3s;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
 }
 
 .logo:hover {
   filter: brightness(1.1);
   transform: scale(1.05);
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
 }
 
 .main {
