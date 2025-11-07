@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
           fallback={
             <div className="loading">
               <Spinner />
-              <p className="p-loading">Cargando...</p>
+              <p className="p-loading">Cargando la lista...</p>
             </div>
           }
         >
